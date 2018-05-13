@@ -13,7 +13,15 @@ The model includes the x and y coordinates of the vehicle, orientation angle (ps
 
 #### Discuss the reasoning behind the chosen N (timestep length) and dt (elapsed duration between timesteps) values. Additionally describe the previous values tried.
 
+The choice of N and dt are important to the performance of the MPC. If N is too small, the MPC will not be able to predict far enough into the future and will not predict an accurate current state and controls to prevent system overshoot or instabilities. However, a large N predicts unnecessary data for the future, thus increasing the computational cost.
+
+A good dt value should be able to capture a system control response accurately. If dt is large, it will miss important control actions and the vehicle will be less responsive. If it is too small, it will respond in a very noisy fashion, fluctuating the controls faster than the car can respond.
+
 The values if 10 and 0.1 were chosen for N and dt, respectively. This was a suggestion on Slack channel by some of the other students in the course. Changing these values created chaotic behaviour, such as: 25 / 0.01, 10 / 0.125, 4 / 0.15.
+
+For the different values of N if the vehicle travels slower than 60 Mph, a smaller N of 6 works but is less responsive to significant system changes. A larger N above 18 woks better for different speed but has a huge computational cost.
+
+It was found that due to the systems 100ms latency, a dt value smaller than this produced control instabilities, while larger that 100ms was found to be slow responding to the situation.
 
 #### Describe any preprocesses done to the waypoints, the vehicle state, and/or actuators prior to the MPC procedure.
 
