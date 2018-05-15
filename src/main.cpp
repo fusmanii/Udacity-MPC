@@ -143,7 +143,7 @@ int main() {
           auto vars = mpc.Solve(state, coeffs);
           
           // Calculate steering and throttle
-          double steer_value = vars[0] / (deg2rad(25));
+          double steer_value = -1 * vars[0] / (deg2rad(25));
           double throttle_value = vars[1];
           
           // Send values to the simulator
